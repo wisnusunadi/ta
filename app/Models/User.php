@@ -43,10 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function LevelUser()
+    {
+        return $this->belongsTo(LevelUser::class);
+    }
+
+
     public function hasRole($role){
-        if($role == $this->level_user_id){
-            return true;
-        }
-        return false;
+       $data = LevelUser::where('nama',$role)->limit(1);
+       return $data->id;
     }
 }
